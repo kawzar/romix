@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a091e17a0914bf3a73ec163987c7db5, type: 3}
+  m_Name: Easy
+  m_EditorClassIdentifier: 
+  Name: 
+  AvailableCards:
+  - {fileID: 11400000, guid: eb13e04df00cae347ad5b761fcf6269d, type: 2}
+  - {fileID: 11400000, guid: 3520108891c2ccc4088443cc6b3d773a, type: 2}
+  - {fileID: 11400000, guid: d01278abc610567459ffb781c61a3f93, type: 2}
+  - {fileID: 11400000, guid: 6e91fa2b0a47a6a4ba4e6b1d524f730d, type: 2}
+  AmountOfPairs: 3
+  TimeAvailable: 120
