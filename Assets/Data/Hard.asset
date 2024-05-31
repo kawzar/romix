@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a091e17a0914bf3a73ec163987c7db5, type: 3}
-  m_Name: Easy
+  m_Name: Hard
   m_EditorClassIdentifier: 
   Name: 
   AvailableCards:
@@ -18,5 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3520108891c2ccc4088443cc6b3d773a, type: 2}
   - {fileID: 11400000, guid: d01278abc610567459ffb781c61a3f93, type: 2}
   - {fileID: 11400000, guid: 6e91fa2b0a47a6a4ba4e6b1d524f730d, type: 2}
-  AmountOfPairs: 3
-  TimeAvailable: 60
+  AmountOfPairs: 4
+  TimeAvailable: 45
