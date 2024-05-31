@@ -164,6 +164,7 @@ public class Board : MonoBehaviour
 
         MakeCardsInteractable();
         timer.gameObject.SetActive(true);
+        timer.ResetTimer();
         timer.StartTimer();
     }
 }

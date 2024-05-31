@@ -49,6 +49,17 @@ namespace Romix.Managers
             string titleText = win ? "You won!" : "Game Over";
             gameOverScreen.Setup(titleText, board.UnveiledCardsAmount, board.MatchedCardsAmount, RestartMatch);
             gameOverScreen.Show(screenTransitionDuration);
+
+            if (win)
+            {
+                HighScoreData data = new HighScoreData
+                {
+                    Revealed = board.UnveiledCardsAmount, 
+                    Matched = board.MatchedCardsAmount
+                };
+                
+                SaveManager.Instance.SaveHighScore(data);
+            }
         }
         
         public void RestartMatch()

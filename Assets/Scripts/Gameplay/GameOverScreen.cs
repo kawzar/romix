@@ -1,4 +1,5 @@
 using System;
+using Romix.Managers;
 using Romix.Utils;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class GameOverScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI matchedText;
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Button tryAgainButton;
+    [SerializeField] private TextMeshProUGUI highScoreUnveiledText;
+    [SerializeField] private TextMeshProUGUI highScoreMatchedText;
     
     public void Setup(string title, int unveiled, int matched, Action tryAgainAction)
     {
@@ -18,6 +21,9 @@ public class GameOverScreen : MonoBehaviour
         unveiledText.SetText(unveiled.ToString());
         matchedText.SetText(matched.ToString());
         tryAgainButton.onClick.AddListener(tryAgainAction.Invoke);
+        var highScore = SaveManager.Instance.GetHighScore();
+        highScoreMatchedText.SetText(highScore.Matched.ToString());
+        highScoreUnveiledText.SetText(highScore.Revealed.ToString());
     }
 
     public void Show(float time)
