@@ -5,6 +5,7 @@ using System.Linq;
 using Romix.Gameplay;
 using Romix.Model;
 using Romix.Utils;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
@@ -14,19 +15,21 @@ public class Board : MonoBehaviour
     [SerializeField] private Sprite cardBackSprite;
     [SerializeField] private Transform gridCanvasTransform;
     [SerializeField] private Timer timer;
-    //[SerializeField] private TextMeshProUGUI unveiledCardsAmountText;
+    [SerializeField] private TextMeshProUGUI unveiledCardsAmountText;
+    [SerializeField] private TextMeshProUGUI matchedCardsAmountText; 
     [SerializeField] public Card cardPrefab;
     [SerializeField] private float cardAppearsAfter = 0.66f;
     [SerializeField] private int cardsTotalAmount = 12;
-    
-    private int unveiledCardsAmount;
-    private int matchedCardsAmount;
+
     private DifficultyData difficulty;
     private Stack<Card> cardStack;
     private EventSystem eventSystem;
     private List<Card> cards;
 
     public Action GameWon;
+    public int UnveiledCardsAmount { get; private set; }
+
+    public int MatchedCardsAmount { get; private set; }
 
     private void Start()
     {
@@ -44,8 +47,8 @@ public class Board : MonoBehaviour
         // Cleanup variables
         cards = new List<Card>();
         cardStack = new Stack<Card>();
-        unveiledCardsAmount = 0;
-        matchedCardsAmount = 0;
+        UnveiledCardsAmount = 0;
+        MatchedCardsAmount = 0;
         this.difficulty = difficulty;
 
         // Cleanup grid transform
@@ -54,7 +57,8 @@ public class Board : MonoBehaviour
         // Setup time & texts
         timer.SetStartTime(difficulty.TimeAvailable);
         timer.gameObject.SetActive(false);
-        //unveiledCardsAmountText.SetText("0");
+        unveiledCardsAmountText.SetText("0");
+        matchedCardsAmountText.SetText("0");
         
         PrepareAndShuffleDeck();
     }
@@ -91,8 +95,9 @@ public class Board : MonoBehaviour
     
     private void OnCardRevealed(Card card)
     {
-        unveiledCardsAmount++;
-        //unveiledCardsAmountText.SetText(unveiledCardsAmount.ToString());
+        UnveiledCardsAmount++;
+        unveiledCardsAmountText.SetText(UnveiledCardsAmount.ToString());
+        
         card.Button.interactable = false;
 
         if (!cardStack.Any())
@@ -105,11 +110,12 @@ public class Board : MonoBehaviour
             var match = cardStack.Pop();
             if (card.Equals(match))
             {
-                matchedCardsAmount += 2;
+                MatchedCardsAmount ++;
+                matchedCardsAmountText.SetText(MatchedCardsAmount.ToString());
                 match.PlayCorrectAnimation();
                 card.PlayCorrectAnimation();
 
-                if (matchedCardsAmount == cardsTotalAmount)
+                if (MatchedCardsAmount * 2 == cardsTotalAmount)
                 {
                     GameWon?.Invoke();
                 }

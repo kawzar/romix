@@ -1,5 +1,4 @@
 using Romix.Model;
-using Romix.Utils;
 using UnityEngine;
 
 namespace Romix.Managers
@@ -10,10 +9,9 @@ namespace Romix.Managers
         [SerializeField] private DifficultyData easy;
         [SerializeField] private DifficultyData normal;
         [SerializeField] private DifficultyData hard;
-        [SerializeField] private CanvasGroup retryScreen;
-        [SerializeField] private CanvasGroup winScreen;
         [SerializeField] private float screenTransitionDuration = 0.75f;
         [SerializeField] private Board board;
+        [SerializeField] private GameOverScreen gameOverScreen;
         public static GameplayManager Instance { get; private set; }
 
         private void Awake()
@@ -29,7 +27,6 @@ namespace Romix.Managers
 
         private void Setup()
         {
-            // Set difficulty
             switch (GameManager.Instance.SelectedDifficulty)
             {
                 case DifficultyEnum.Easy:
@@ -49,28 +46,18 @@ namespace Romix.Managers
 
         private void ShowEndOfGameScreen(bool win)
         {
-            if (win)
-            {
-                winScreen.gameObject.SetActive(true);
-                StartCoroutine(winScreen.FadeIn(screenTransitionDuration));
-            }
-            else
-            {
-                retryScreen.gameObject.SetActive(true);
-                StartCoroutine(retryScreen.FadeIn(screenTransitionDuration));
-            }
+            string titleText = win ? "You won!" : "Game Over";
+            gameOverScreen.Setup(titleText, board.UnveiledCardsAmount, board.MatchedCardsAmount, RestartMatch);
+            gameOverScreen.Show(screenTransitionDuration);
         }
-
-
-
+        
         public void RestartMatch()
         {
-            StartCoroutine(retryScreen.FadeIn(screenTransitionDuration, () =>
+            Setup();
+            gameOverScreen.Hide(screenTransitionDuration, () =>
             {
-                retryScreen.gameObject.SetActive(false);
-                Setup();
                 board.StartMatch();
-            }));
+            });
         }
     }
 }

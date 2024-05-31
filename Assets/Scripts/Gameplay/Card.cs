@@ -20,16 +20,13 @@ namespace Romix.Gameplay
         public Button Button => button;
         public event Action<Card> CardRevealed;
 
-        public Card Initialize(CardTypeEnum type, Sprite back, Sprite icon)
+        public void Initialize(CardTypeEnum cardType, Sprite back, Sprite icon)
         {
-            this.type = type;
+            type = cardType;
             backSprite = back;
             iconSprite = icon;
             image.sprite = backSprite;
             button.onClick.AddListener(OnCardClicked);
-            gameObject.SetActive(true);
-
-            return this;
         }
 
         public void OnCardClicked()
@@ -58,7 +55,7 @@ namespace Romix.Gameplay
 
         public bool Equals(Card another)
         {
-            return this.type == another.type;
+            return type == another.Type;
         }
 
         public void PlayCorrectAnimation()
