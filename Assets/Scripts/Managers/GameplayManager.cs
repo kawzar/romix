@@ -27,6 +27,9 @@ namespace Romix.Managers
 
         private void Setup()
         {
+            board.GameWon -= () => ShowEndOfGameScreen(win: true);
+            board.GameLost -= () => ShowEndOfGameScreen(win: false);
+            
             switch (GameManager.Instance.SelectedDifficulty)
             {
                 case DifficultyEnum.Easy:
@@ -42,6 +45,7 @@ namespace Romix.Managers
             }
 
             board.GameWon += () => ShowEndOfGameScreen(win: true);
+            board.GameLost += () => ShowEndOfGameScreen(win: false);
         }
 
         private void ShowEndOfGameScreen(bool win)

@@ -27,6 +27,7 @@ public class Board : MonoBehaviour
     private List<Card> cards;
 
     public Action GameWon;
+    public Action GameLost;
     public int UnveiledCardsAmount { get; private set; }
 
     public int MatchedCardsAmount { get; private set; }
@@ -56,7 +57,10 @@ public class Board : MonoBehaviour
         
         // Setup time & texts
         timer.SetStartTime(difficulty.TimeAvailable);
+        timer.TimeReachedZero -= () => GameLost?.Invoke();
+        timer.TimeReachedZero += () => GameLost?.Invoke();
         timer.gameObject.SetActive(false);
+        timer.ResetTimer();
         unveiledCardsAmountText.SetText("0");
         matchedCardsAmountText.SetText("0");
         
@@ -164,7 +168,6 @@ public class Board : MonoBehaviour
 
         MakeCardsInteractable();
         timer.gameObject.SetActive(true);
-        timer.ResetTimer();
         timer.StartTimer();
     }
 }

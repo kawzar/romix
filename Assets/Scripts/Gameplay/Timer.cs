@@ -12,13 +12,7 @@ namespace Romix.Gameplay
         private float currentTime;
         private bool isRunning = false;
         
-        public event Action OnTimeReachedZero;
-
-        private void Start()
-        {
-            ResetTimer();
-            UpdateTimerDisplay();
-        }
+        public Action TimeReachedZero;
 
         private void Update()
         {
@@ -29,7 +23,7 @@ namespace Romix.Gameplay
             {
                 currentTime = 0;
                 isRunning = false;
-                OnTimeReachedZero?.Invoke();
+                TimeReachedZero?.Invoke();
             }
                 
             UpdateTimerDisplay();
@@ -38,6 +32,7 @@ namespace Romix.Gameplay
         public void StartTimer()
         {
             isRunning = true;
+            UpdateTimerDisplay();
         }
 
         public void PauseTimer()
@@ -54,7 +49,6 @@ namespace Romix.Gameplay
         {
             currentTime = startTimeInSeconds;
             isRunning = false;
-            UpdateTimerDisplay();
         }
 
         private void UpdateTimerDisplay()
