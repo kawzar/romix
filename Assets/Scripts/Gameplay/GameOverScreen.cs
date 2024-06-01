@@ -14,6 +14,7 @@ public class GameOverScreen : MonoBehaviour
     [SerializeField] private Button tryAgainButton;
     [SerializeField] private TextMeshProUGUI highScoreUnveiledText;
     [SerializeField] private TextMeshProUGUI highScoreMatchedText;
+
     
     public void Setup(string title, int unveiled, int matched, Action tryAgainAction)
     {

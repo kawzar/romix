@@ -12,6 +12,7 @@ namespace Romix.Managers
         [SerializeField] private float screenTransitionDuration = 0.75f;
         [SerializeField] private Board board;
         [SerializeField] private GameOverScreen gameOverScreen;
+        [SerializeField] private AudioClip gameOverAudioClip;
         public static GameplayManager Instance { get; private set; }
 
         private void Awake()
@@ -63,6 +64,10 @@ namespace Romix.Managers
                 };
                 
                 SaveManager.Instance.SaveHighScore(data);
+            }
+            else
+            {
+                AudioManager.Instance.PlaySound(gameOverAudioClip);
             }
         }
         

@@ -367,6 +367,7 @@ MonoBehaviour:
   image: {fileID: 8667708353465745380}
   animator: {fileID: 8667708352893467645}
   button: {fileID: 8667708352893467642}
+  flipAudioClip: {fileID: 8300000, guid: 14fa2782ceb059b498b7a4772b671111, type: 3}
 --- !u!114 &5937348797303886683
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,8 @@ namespace Romix.Gameplay
         [SerializeField] private Image image;
         [SerializeField] private Animator animator;
         [SerializeField] private Button button;
-
+        [SerializeField] private AudioClip flipAudioClip;
+        
         private CardTypeEnum type;
         private Sprite backSprite;
         private Sprite iconSprite;
@@ -41,7 +42,8 @@ namespace Romix.Gameplay
         {
             isShowing = !isShowing;
             image.sprite = isShowing ? iconSprite : backSprite;
-
+            AudioManager.Instance.PlaySound(flipAudioClip);
+            
             if (isShowing)
             {
                 animator.Play("Select");

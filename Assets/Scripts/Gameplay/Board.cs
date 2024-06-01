@@ -20,6 +20,9 @@ public class Board : MonoBehaviour
     [SerializeField] public Card cardPrefab;
     [SerializeField] private float cardAppearsAfter = 0.66f;
     [SerializeField] private int cardsTotalAmount = 12;
+    [SerializeField] private AudioClip rightAudioClip;
+    [SerializeField] private AudioClip wrongAudioClip;
+
 
     private DifficultyData difficulty;
     private Stack<Card> cardStack;
@@ -118,6 +121,7 @@ public class Board : MonoBehaviour
                 matchedCardsAmountText.SetText(MatchedCardsAmount.ToString());
                 match.PlayCorrectAnimation();
                 card.PlayCorrectAnimation();
+                AudioManager.Instance.PlaySound(rightAudioClip);
 
                 if (MatchedCardsAmount * 2 == cardsTotalAmount)
                 {
@@ -128,7 +132,8 @@ public class Board : MonoBehaviour
             {
                 card.PlayWrongAnimation();
                 match.PlayWrongAnimation();
-
+                AudioManager.Instance.PlaySound(wrongAudioClip);
+                
                 StartCoroutine(ToggleShowAndResetCardPair(card, match));
             }
         }
